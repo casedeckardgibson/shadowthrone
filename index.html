@@ -268,32 +268,51 @@
                 ]},
 
                 "alejandra_seduce1": { bg: "bg_alejandra_room.png", dialogues: [
-                    { speaker: "Alejandra", text: "Then show me how badly you want me.", char: "alejandra_default.png", pos: "right" }
+                    { speaker: "Alejandra", text: "Then show me how badly you want me.", char: "alejandra_aroused.png", pos: "right" }
                 ], choices: [
-                    { text: "Kiss her deeply", effect: () => gameScript.variables.alejandraAffection += 35, next: "alejandra_seduce3" },
+                    { text: "Touch her hand", effect: () => gameScript.variables.alejandraAffection -= 20, next: "alejandra_reject" },
                     { text: "Grab her waist", effect: () => gameScript.variables.alejandraAffection += 40, next: "alejandra_seduce2" },
-                    { text: "Touch her hand", effect: () => gameScript.variables.alejandraAffection -= 20, next: "alejandra_reject" }
+                    { text: "Kiss her deeply", effect: () => gameScript.variables.alejandraAffection += 25, next: "alejandra_seduce3" }
                 ]},
 
                 "alejandra_seduce2": { bg: "bg_alejandra_room.png", dialogues: [
-                    { speaker: "Alejandra", text: "Taking control, and yet not rushing... You are such a good boy...", char: "alejandra_blush.png", pos: "center" }
-                ], next: "alejandra_seduce3" },
+                    { speaker: "Narrator", text: "She pulls her clothing off.", noSprite: true },
+                    { speaker: "Alejandra", text: "You are such a good boy...", char: "alejandra_blush.png", pos: "center" }
+                ], next: "alejandra_talk" },
 
                 "alejandra_seduce3": { bg: "bg_alejandra_room.png", dialogues: [
+                    { speaker: "Narrator", text: "She moans softly as you kiss her.", noSprite: true },
+                    { speaker: "Narrator", text: "She presses you inside of her.", char: "alejandra_top.png", pos: "center" },
                     { speaker: "Alejandra", text: "MMmm I like it...", char: "alejandra_aroused.png", pos: "center" }
                 ], next: "alejandra_talk" },
 
                 "alejandra_ambition": { bg: "bg_alejandra_room.png", dialogues: [
-                    { speaker: "Alejandra", text: "I will not stay in the shadows forever.", char: "alejandra_default.png", pos: "center" }
-                ], next: "alejandra_talk" },
+                    { speaker: "Alejandra", text: "I will not stay in the shadows forever.", char: "alejandra_default.png", pos: "center" },
+                    { speaker: "Alejandra", text: "I am a goddess of the Night....", char: "alejandra_interest.png", pos: "center" },
+                    { speaker: "Narrator", text: "She moves closer to you, her eyes gleaming with ambition.", noSprite: true },
+                    { speaker: "Alejandra", text: "and I will be worshipped!", char: "alejandra_top.png", pos: "center" },
+                    { speaker: "Narrator", text: "She pushes you down onto the floor, and in an instant she's on top of you...", noSprite: true },
+                    { speaker: "Alejandra", text: "The Princess is weak. The Queen is old. The King is a prisoner.", char: "alejandra_top.png", pos: "center" },
+                    { speaker: "Narrator", text: "You feel her warmth grinding against you...", noSprite: true },
+                    { speaker: "Alejandra", text: "I am the only one with the vision and strength to lead this kingdom into a new era.", char: "alejandra_top.png", pos: "center" }
+                ], choices: [
+                    { text: "Grab her hips", effect: () => gameScript.variables.alejandraAffection += 35, next: "alejandra_seduce3" },
+                    { text: "Grab her breasts", effect: () => gameScript.variables.alejandraAffection += 10, next: "alejandra_seduce2" },
+                    { text: "Push her off and leave", effect: () => gameScript.variables.alejandraAffection -= 40, next: "alejandra_reject" }
+                ]},
 
                 "alejandra_reject": { bg: "bg_alejandra_room.png", dialogues: [
-                    { speaker: "Alejandra", text: "Too soft. You're too weak.", char: "alejandra_disgusted.png", pos: "center" }
+                    { speaker: "Alejandra", text: "Ha! Too soft. You're too weak.", char: "alejandra_disgusted.png", pos: "center" }
                 ], next: "hub" },
 
                 "alejandra_suspect": { bg: "bg_alejandra_room.png", dialogues: [
-                    { speaker: "Alejandra", text: "The Princess is paranoid. She accuses everyone of trying to poison her.", effect: () => gameScript.variables.alejandraAffection -= 20, char: "alejandra_default.png", pos: "center" }
-                ], next: "hub" },
+                    { speaker: "Alejandra", text: "The Princess is paranoid. She accuses everyone of trying to poison her.", char: "alejandra_disgusted.png", pos: "center" },
+                    { speaker: "Alejandra", text: "Do you think I would do such a thing?", effect: () => gameScript.variables.alejandraAffection -= 20, char: "alejandra_interest.png", pos: "center" }
+                ], choices: [
+                    { text: "You seem very... capable...", effect: () => gameScript.variables.alejandraAffection += 20, next: "alejandra_seduce1" },
+                    { text: "What are you up to then?", effect: () => gameScript.variables.alejandraAffection += 15, next: "alejandra_ambition" },
+                    { text: "Return to Throne Room", next: "hub" }
+                ]},
 
 // Queen Talk + Seduction
                 "queen_talk": { bg: "bg_throne_room.png", dialogues: [
