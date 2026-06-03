@@ -1,0 +1,50 @@
+##NOTES
+
+queen.png
+queen_aroused.png
+
+princess.png
+princess_sad.png
+princess_aroused.png
+princess_angry.png
+
+rachel_shadow.png
+rachel_default.png
+rachel_sad.png
+rachel_aroused.png
+rachel_angry.png
+rachel_disgusted.png
+rachel_blush.png
+
+alejandra_shadow.png
+alejandra_default.png
+alejandra_sad.png
+alejandra_aroused.png
+alejandra_angry.png
+alejandra_disgusted.png
+alejandra_blush.png
+
+
+story: Player investigates plot to poison the princess. At end game stage, player can choose to steal poison apple or leave it alone after talking to the cook. if they steal it, player can choose who to give poison apple to: Princess, Queen, Alejandra, Rachel, Advisor. If they don't steal it, Princess dies: bg_princess_poisoned.png - and trigger corrupt end: bg_queen_executes.png
+
+End scene is two-part: 1st show who dies: bg_advisor_poisoned.png (loyal end), bg_princess_poisoned.png (corrupt end), or bg_queen_poisoned.png (corrupt end)
+2nd, show mc's fate
+
+bg_best_ending1 (high Princess, Alejandra, and Rachel affection, loyal end - kill advisor)
+bg_best_ending2 (high Princess, Alejandra, and Rachel affection, corrupt end - kill Queen)
+
+bg_princess_ending1 (high Princess affection, loyal end - kill advisor)
+bg_princess_ending2 (high Princess affection, corrupt end - kill Queen)
+
+bg_alejandra_ending1 (high Alejandra affection, corrupt end - kill Queen or Princess)
+bg_rachel_ending1 (high Rachel affection, corrupt end - kill Queen or Princess)
+
+bg_alejandra_rachel_ending1 (high Alejandra and Rachel affection, loyal end - kill advisor)
+bg_alejandra_rachel_ending2 (high Alejandra and Rachel affection, corrupt end - kill Queen or Princess)
+
+bg_princess_alejandra_ending1 (high Princess and Alejandra affection, loyal end - kill advisor)
+bg_princess_rachel_ending1 (high Princess and Rachel affection, loyal end - kill advisor)
+
+Secret ending - if player has low Princess affection, they can seduce the Queen, and give apple to Princess:
+bg_queen_secret.png (high Queen affection, corrupt end - kill Princess)
+
