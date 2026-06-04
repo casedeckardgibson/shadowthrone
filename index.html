@@ -14,7 +14,7 @@
 
         #background { position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; image-rendering:crisp-edges; transition:opacity 0.8s; }
 
-        .sprite { position: absolute; bottom: 145px; height: 480px; object-fit: contain; image-rendering: crisp-edges; transition: all 0.8s; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.9)); z-index: 10; }
+        .sprite { position: absolute; bottom: 145px; height: 580px; object-fit: contain; image-rendering: crisp-edges; transition: all 0.8s; filter: drop-shadow(0 20px 30px rgba(0,0,0,0.9)); z-index: 10; }
         #sprite-left { left: 10%; } #sprite-center { left: 50%; transform: translateX(-50%); } #sprite-right { right: 10%; }
 
         #dialogue-box { position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); width: 88%; max-height: 195px; background: rgba(18,8,4,0.96); border: 5px solid #d4af37; border-radius: 15px; padding: 25px 45px; color: #f0d9a8; box-shadow: 0 15px 35px rgba(0,0,0,0.9); overflow-y: auto; z-index: 20; }
@@ -180,9 +180,12 @@
                 ]},
 
                 "princess_troubled": { bg: "bg_princess_room.png", dialogues: [
-                    { speaker: "Princess Elara", text: "I am. I feel eyes on me constantly... and not the kind that admire.", char: "princess_scared.png", pos: "center" },
+                    { speaker: "Princess Elara", text: "I feel eyes on me constantly... and not the kind that admire.", char: "princess_scared.png", pos: "center" },
                     { speaker: "Princess Elara", text: "Sometimes my food tastes strange. My wine burns my throat. I fear... I am being poisoned.", char: "princess_sad.png", pos: "center" }
-                ], next: "princess_seduction" },
+                ], choices: [
+                    { text: "Who do you suspect?", effect: () => gameScript.variables.intrigue += 15, next: "princess_investigate" },
+                    { text: "Return to Throne Room to investigate", next: "hub" }
+                ]},
 
                 "princess_response": { bg: "bg_princess_room.png", dialogues: [
                     { speaker: "Princess Elara", text: "I have no one else I can trust. Will you help me?", char: "princess.png", pos: "center" }
@@ -194,13 +197,22 @@
 
                 "princess_seduction": { bg: "bg_princess_room.png", dialogues: [
                     { speaker: "Princess Elara", text: "Thank you... I feel safer just knowing you're here.", char: "princess_happy.png", pos: "center" },
-                    { speaker: "Princess Elara", text: "Would you...", char: "princess.png", pos: "left" },
-                    { speaker: "Princess Elara", text: "Stay with me a little longer?", char: "princess_aroused.png", pos: "left" },
+                    { speaker: "Princess Elara", text: "Would you...", char: "princess_aroused.png", pos: "left" },
+                    { speaker: "Princess Elara", text: "Stay with me a little longer?", char: "princess_dg2.png", pos: "left" },
                     { speaker: "Princess Elara", text: "please...", char: "princess_bottom.png", pos: "center" }
-                ], next: "hub" },
+                ], choices: [
+                    { text: "Take her in your arms", effect: () => gameScript.variables.princessAffection += 35, next: "princess_love" },
+                    { text: "Choose duty over pleasure.", effect: () => gameScript.variables.loyalty += 15, next: "princess_investigate" },
+                    { text: "Return to Throne Room", next: "hub" }
+                ]},
+                "princess_love": { bg: "bg_princess_room.png", dialogues: [
+                    { speaker: "Princess Elara", text: "Ohh I have dreamed of this moment...", char: "princess_top.png", pos: "center" },
+                    { speaker: "Narrator", text: "You slide yourself deep inside her...", char: "princess_bg1.png", pos: "center" },
+                    { speaker: "Princess Elara", text: "Unnnghhh", char: "princess_bg2.png", pos: "center" }
+                ], next: "bedrooms_talk" },
 
                 "princess_investigate": { bg: "bg_princess_room.png", dialogues: [
-                    { speaker: "Princess Elara", text: "Thank you... I saw the advisor whispering to Alejandra.", char: "princess_sad.png", pos: "center" }
+                    { speaker: "Princess Elara", text: "I saw the advisor whispering to Alejandra, start with her...", char: "princess_sad.png", pos: "center" }
                 ], next: "alejandra_suspect" },
 
                 // ====================== BEDROOMS ======================
@@ -215,7 +227,7 @@
 
                 // ====================== RACHEL ======================
                 "rachel_talk": { bg: "bg_rachel_room.png", dialogues: [
-                    { speaker: "Rachel", text: "You return to the shadows... What is it you desire this time?", char: "rachel_shadow.png", pos: "center" }
+                    { speaker: "Rachel", text: "You seek something... What is it you desire this time?", char: "rachel_shadow.png", pos: "center" }
                 ], choices: [
                     { text: "Compliment her beauty", effect: () => gameScript.variables.rachelAffection += 10, next: "rachel_seduce1" },
                     { text: "Ask about her magic", effect: () => gameScript.variables.rachelAffection += 15, next: "rachel_magic" },
@@ -226,9 +238,9 @@
                 { speaker: "Rachel", text: "Such sweet thoughts and words...", char: "rachel_default.png", pos: "center" },    
                 { speaker: "Rachel", text: "But what can you show me?", char: "rachel_blush.png", pos: "center" }
                 ], choices: [
-                    { text: "Kiss her passionately", effect: () => gameScript.variables.rachelAffection += 35, next: "rachel_seduce3" },
+                    { text: "Kiss her passionately", effect: () => gameScript.variables.rachelAffection += 25, next: "rachel_seduce3" },
                     { text: "Grab her waist", effect: () => gameScript.variables.rachelAffection += 40, next: "rachel_seduce2" },
-                    { text: "Touch her leg", effect: () => gameScript.variables.rachelAffection -= 35, next: "rachel_reject" }
+                    { text: "Touch her thigh", effect: () => gameScript.variables.rachelAffection -= 35, next: "rachel_reject" }
                 ]},
 
                 "rachel_seduce3": { bg: "bg_rachel_room.png", dialogues: [
@@ -243,7 +255,7 @@
                     { speaker: "Rachel", text: "My magic can reveal many things...", char: "rachel_default.png", pos: "center" },
                     { speaker: "Rachel", text: "I see what you desire, boy...", char: "rachel_aroused.png", pos: "left" }
                 ], choices: [
-                    { text: "Power", effect: () => gameScript.variables.corruption += 25, next: "rachel_power" },
+                    { text: "Power", effect: () => gameScript.variables.rachelAffection += 45, next: "rachel_power" },
                     { text: "Passion", effect: () => gameScript.variables.rachelAffection += 20, next: "rachel_seduce1" },
                     { text: "Peace", effect: () => gameScript.variables.loyalty += 25, next: "rachel_reject" }
                 ]},
@@ -252,52 +264,76 @@
                     { speaker: "Rachel", text: "Pathetic.", char: "rachel_disgusted.png", pos: "center" }
                 ], next: "hub" },
 
+                "rachel_reject2": { bg: "bg_rachel_room.png", dialogues: [
+                    { speaker: "Rachel", text: "You think you can say no to me?!", char: "rachel_angry.png", pos: "center" },
+                    { speaker: "Narrator", text: "She chants a spell that causes you to feel a burning sensation in your groin.", noSprite: true },
+                    { speaker: "Narrator", text: "Suddenly, she's on top of you.", char: "rachel_crawl.png", pos: "center" },
+                    { speaker: "Rachel", text: "My magic doesn't allow for refusal.", char: "rachel_aroused.png", pos: "center" }
+                ], next: "dungeon_link" },
+
                 "rachel_power": { bg: "bg_rachel_room.png", dialogues: [
-                    { speaker: "Rachel", text: "Power is intoxicating, isn't it?", char: "rachel_aroused.png", pos: "center" },
+                    { speaker: "Rachel", text: "Power is intoxicating, isn't it?", char: "rachel_crawl.png", pos: "center" },
                     { speaker: "Rachel", text: "I can teach you how to harness it... but it comes at a price.", char: "rachel_blush.png", pos: "center" },
-                    { speaker: "Rachel", text: "Join with me and together we will rule Eldoria", char: "rachel_blush.png", pos: "center" }
-                ], next: "hub" },
+                    { speaker: "Narrator", text: "She whispers an incantation and your garments fall away exposing your stiff cock.", noSprite: true },
+                    { speaker: "Rachel", text: "Join with me and together we will rule Eldoria", char: "rachel_dg.png", pos: "center" },
+                    ], choices: [
+                    { text: "Throw yourself on top of her...", effect: () => gameScript.variables.corruption += 45, next: "rachel_join" },
+                    { text: "No", effect: () => gameScript.variables.rachelAffection -= 20, next: "rachel_reject2" },
+                ]}, 
+
+                 "rachel_join": { bg: "bg_rachel_room.png", dialogues: [
+                    { speaker: "Narrator", text: "Your body pulses with energy as you push into her sweet body.", noSprite: true },
+                    { speaker: "Narrator", text: "She moans loudly as you demonstrate your power.", char: "rachel_back.png", pos: "center" }], next: "bedrooms_talk" },
+
+                 "dungeon_link": {bg: "bg_dungeon.png", dialogues: [
+                    { speaker: "Narrator", text: "When you awake, you find yourself in the dungeon.", noSprite: true },
+                    { speaker: "MC", text: "Uuuh... I'm so thirsty", char: "mc.png", pos: "center" },
+                    { speaker: "Narrator", text: "You see a ladder on your left and a hallway lit by torches on your right.", noSprite: true }
+                ], choices: [
+                        { text: "Climb the ladder", effect: () => gameScript.variables.intrigue += 10, next: "bedrooms_talk" },
+                        { text: "Take the hallway", effect: () => gameScript.variables.intrigue += 10, next: "dungeon_talk" }
+                    ]},
 
                 // ====================== ALEJANDRA ======================
                 "alejandra_talk": { bg: "bg_alejandra_room.png", dialogues: [
                     { speaker: "Alejandra", text: "You keep coming back... Are you falling for me already?", char: "alejandra_shadow.png", pos: "center" }
                 ], choices: [
-                    { text: "Flirt with her", effect: () => gameScript.variables.alejandraAffection += 20, next: "alejandra_seduce1" },
+                    { text: "Flirt with her", effect: () => gameScript.variables.alejandraAffection += 10, next: "alejandra_seduce1" },
                     { text: "Ask about her ambitions", effect: () => gameScript.variables.alejandraAffection += 15, next: "alejandra_ambition" },
                     { text: "Return to Throne Room", next: "hub" }
                 ]},
 
                 "alejandra_seduce1": { bg: "bg_alejandra_room.png", dialogues: [
-                    { speaker: "Alejandra", text: "Then show me how badly you want me.", char: "alejandra_aroused.png", pos: "right" }
+                    { speaker: "Alejandra", text: "Your lust for my body is obvious... show me how badly you want me.", char: "alejandra_aroused.png", pos: "right" }
                 ], choices: [
                     { text: "Touch her hand", effect: () => gameScript.variables.alejandraAffection -= 20, next: "alejandra_reject" },
-                    { text: "Grab her waist", effect: () => gameScript.variables.alejandraAffection += 40, next: "alejandra_seduce2" },
-                    { text: "Kiss her deeply", effect: () => gameScript.variables.alejandraAffection += 25, next: "alejandra_seduce3" }
+                    { text: "Grab her waist", effect: () => gameScript.variables.alejandraAffection += 25, next: "alejandra_seduce2" },
+                    { text: "Kiss her deeply", effect: () => gameScript.variables.alejandraAffection += 25, next: "alejandra_seduce2" }
                 ]},
 
                 "alejandra_seduce2": { bg: "bg_alejandra_room.png", dialogues: [
-                    { speaker: "Narrator", text: "She pulls her clothing off.", noSprite: true },
+                    { speaker: "Narrator", text: "She pulls her clothing off revealing her caramel brown skin and curves.", noSprite: true },
                     { speaker: "Alejandra", text: "You are such a good boy...", char: "alejandra_blush.png", pos: "center" }
                 ], next: "alejandra_talk" },
 
                 "alejandra_seduce3": { bg: "bg_alejandra_room.png", dialogues: [
-                    { speaker: "Narrator", text: "She moans softly as you kiss her.", noSprite: true },
-                    { speaker: "Narrator", text: "She presses you inside of her.", char: "alejandra_top.png", pos: "center" },
-                    { speaker: "Alejandra", text: "MMmm I like it...", char: "alejandra_aroused.png", pos: "center" }
+                    { speaker: "Narrator", text: "She moans softly as you kiss her.", char: "alejandra_kiss.png", pos: "center" },
+                    { speaker: "Narrator", text: "She presses you inside of her.", char: "alejandra_top2.png", pos: "center" },
+                    { speaker: "Alejandra", text: "MMmm I love this...", effect: () => gameScript.variables.alejandraAffection += 20, char: "alejandra_top.png", pos: "center" }
                 ], next: "alejandra_talk" },
 
                 "alejandra_ambition": { bg: "bg_alejandra_room.png", dialogues: [
-                    { speaker: "Alejandra", text: "I will not stay in the shadows forever.", char: "alejandra_default.png", pos: "center" },
+                    { speaker: "Alejandra", text: "I will not stay in the shadows forever.", char: "alejandra_dg.png", pos: "right" },
                     { speaker: "Alejandra", text: "I am a goddess of the Night....", char: "alejandra_interest.png", pos: "center" },
-                    { speaker: "Narrator", text: "She moves closer to you, her eyes gleaming with ambition.", noSprite: true },
+                    { speaker: "Narrator", text: "She moves closer to you, her eyes gleaming with ambition.", char: "alejandra_close2.png", pos: "center"  },
                     { speaker: "Alejandra", text: "and I will be worshipped!", char: "alejandra_top.png", pos: "center" },
-                    { speaker: "Narrator", text: "She pushes you down onto the floor, and in an instant she's on top of you...", noSprite: true },
+                    { speaker: "Narrator", text: "She pushes you down onto the floor, and in an instant she's on top of you...",char: "alejandra_top2.png", pos: "center" },
                     { speaker: "Alejandra", text: "The Princess is weak. The Queen is old. The King is a prisoner.", char: "alejandra_top.png", pos: "center" },
                     { speaker: "Narrator", text: "You feel her warmth grinding against you...", noSprite: true },
                     { speaker: "Alejandra", text: "I am the only one with the vision and strength to lead this kingdom into a new era.", char: "alejandra_top.png", pos: "center" }
                 ], choices: [
-                    { text: "Grab her hips", effect: () => gameScript.variables.alejandraAffection += 35, next: "alejandra_seduce3" },
-                    { text: "Grab her breasts", effect: () => gameScript.variables.alejandraAffection += 10, next: "alejandra_seduce2" },
+                    { text: "Grab her hips", effect: () => gameScript.variables.alejandraAffection += 45, next: "alejandra_seduce3" },
+                    { text: "Grab her breasts", effect: () => gameScript.variables.alejandraAffection += 20, next: "alejandra_seduce2" },
                     { text: "Push her off and leave", effect: () => gameScript.variables.alejandraAffection -= 40, next: "alejandra_reject" }
                 ]},
 
@@ -307,11 +343,11 @@
 
                 "alejandra_suspect": { bg: "bg_alejandra_room.png", dialogues: [
                     { speaker: "Alejandra", text: "The Princess is paranoid. She accuses everyone of trying to poison her.", char: "alejandra_disgusted.png", pos: "center" },
-                    { speaker: "Alejandra", text: "Do you think I would do such a thing?", effect: () => gameScript.variables.alejandraAffection -= 20, char: "alejandra_interest.png", pos: "center" }
+                    { speaker: "Alejandra", text: "Do you think I would do such a thing?",  char: "alejandra_close.png", pos: "center" }
                 ], choices: [
                     { text: "You seem very... capable...", effect: () => gameScript.variables.alejandraAffection += 20, next: "alejandra_seduce1" },
-                    { text: "What are you up to then?", effect: () => gameScript.variables.alejandraAffection += 15, next: "alejandra_ambition" },
-                    { text: "Return to Throne Room", next: "hub" }
+                    { text: "What are you up to then?", effect: () => gameScript.variables.alejandraAffection += 25, next: "alejandra_ambition" },
+                    { text: "Return to Throne Room", effect: () => gameScript.variables.alejandraAffection -= 10,next: "hub" }
                 ]},
 
 // Queen Talk + Seduction
@@ -409,8 +445,9 @@
                 ]},
 
                 "king_freedom": { bg: "bg_dungeon.png", dialogues: [
-                    { speaker: "King", text: "Thank you... I don't know why the Advisor would do this to me...", char: "king.png", pos: "center" },
-                    { speaker: "King", text: "I must get back to the throne room and confront the Advisor!", char: "king.png", pos: "center" }
+                    { speaker: "King", text: "Thank you... that damn maid and I were fooling around down here...", char: "maid_back.png", pos: "left" },
+                    { speaker: "King", text: "She shackled me and then left me!", char: "king.png", pos: "center" },
+                    { speaker: "King", text: "I must get back to the throne room!", char: "king.png", pos: "center" }
                 ], next: "dungeon_talk2" },
                 
                 "king_left": { bg: "bg_dungeon.png", dialogues: [
@@ -705,7 +742,9 @@
 
                 "cook_talk3": { bg: "bg_castle_hall.png", dialogues: [
                     { speaker: "Cook", text: "Well at least you have manners.", char: "cook.png", pos: "center" },
-                    { speaker: "Cook", text: "...Fine. What do you want? But be quick — the Queen is watching.", char: "cook.png", pos: "right" }
+                    { speaker: "Narrator", text: "The cook's eyes linger on you for a moment longer than expected", char: "cook_beauty.png", pos: "right" },
+                     { speaker: "Narrator", text: "You feel a warm sensation of desire from her eyes...", char: "cook_beauty.png", pos: "right" },
+                    { speaker: "Cook", text: "...Fine. What do you want? But be quick — the Queen is watching.", char: "cook_back.png", pos: "right" }
                 ], choices: [
                     { text: "Ask about the fruit shipments", effect: () => {}, next: "cook_fruit" },
                     { text: "Discretly place your hand on the Cook's butt", effect: () => {}, next: "cook_seduce1" },
@@ -722,33 +761,33 @@
                 "cook_fruit2": { bg: "bg_castle_hall.png", dialogues: [
                     { speaker: "Cook", text: "Why should I help you? Go speak to Lady Alejandra about it.", char: "cook_apple.png", pos: "center" }
                 ], choices: [
-                    { text: "Spy on Lady Alejandra", effect: () => {}, next: "alejandra_suspect" },
+                    { text: "Ask Lady Alejandra", effect: () => {}, next: "alejandra_suspect" },
                     { text: "Return to Throne Room", next: "hub" }
                 ]},
 
                 "cook_seduce1": { bg: "bg_castle_hall.png", dialogues: [
                     { speaker: "Cook", text: "My lord! This is hardly the place... ", char: "cook_aroused2.png", pos: "right" },
-                    { speaker: "Cook", text: "But I know somewhere quiet we can go.", char: "cook_aroused.png", pos: "center" }
+                    { speaker: "Cook", text: "But I know somewhere quiet we can go.", char: "cook_back.png", pos: "center" }
                 ], choices: [
                     { text: "Follow her", effect: () => {}, next: "cook_seduce2" },
                     { text: "Return to Throne Room", next: "hub" }
                 ]},
 
                 "cook_seduce2": { bg: "bg_dungeon.png", dialogues: [
-                    { speaker: "Cook", text: "Quick follow me while no one is looking", char: "cook_aroused2.png", pos: "right" },
-                    { speaker: "Cook", text: "I can see why the Princess fancies you...", char: "cook_apple.png", pos: "center" }
+                    { speaker: "Cook", text: "Quick follow me while no one is looking", char: "cook_back2.png", pos: "right" },
+                    { speaker: "Cook", text: "I can see why the Princess fancies you...", char: "cook_apple2.png", pos: "center" }
                 ], choices: [
                     { text: "Grab the poison apple", effect: () => { gameScript.variables.poisonAppleStolen = true; }, next: "poison_apple_choice" },
                     { text: "Focus your affections on her", effect: () => {}, next: "cook_seduce3" },
                     { text: "Return to Throne Room", next: "hub" }
                 ]},
                 "cook_seduce3": { bg: "bg_dungeon.png", dialogues: [
-                    { speaker: "Cook", text: "I want you so badly... Take me!", char: "cook_blush.png", pos: "center" },
-                    { speaker: "Narrator", text: "You slip yourself between her thighs while she wraps her legs around you", char: "cook_pleasure.png", pos: "right" },
-                    { speaker: "Narrator", text: "You passionately kiss the cook.. her eyes veiled in pleasure", char: "cook_blush.png", pos: "right" }], next: "princess_wrath"},
+                    { speaker: "Cook", text: "I want you so badly... Take me!", char: "cook_back2.png", pos: "center" },
+                    { speaker: "Narrator", text: "You slip yourself between her thighs while she wraps her legs around you", char: "cook_cooked.png", pos: "right" },
+                    { speaker: "Narrator", text: "You passionately kiss the cook.. her eyes veiled in pleasure", char: "cook_pleasure.png", pos: "right" }], next: "princess_wrath"},
 
                 "princess_wrath": { bg: "bg_princess_room.png", dialogues: [
-                    { speaker: "Narrator", text: "In your lust you didn't hear the Princess approaching...", char: "cook_pleasure.png", pos: "right" },
+                    { speaker: "Narrator", text: "In your lust you didn't hear the Princess approaching...", char: "cook_back2.png", pos: "right" },
                     { speaker: "Princess Elara", text: "How dare you! I you my heart and you betrayed me!", char: "princess_angry.png", pos: "center" },
                     { speaker: "Narrator", text: "The Princess's eyes fill with rage and heartbreak.", char: "princess_sad.png", pos: "center" },
                     { speaker: "Princess Elara", text: "I'll kill you for this treachery.", char: "princess_angry.png", pos: "right" }
@@ -756,8 +795,8 @@
 
                 "poison_apple_choice": { bg: "bg_dungeon.png", dialogues: [
                     { speaker: "Narrator", text: "You passionately kiss the cook.. her eyes veiled in pleasure", char: "cook_blush.png", pos: "right" },
-                    { speaker: "Cook", text: "ooohh I want you...", char: "cook_pleasure.png", pos: "right" },  
-                    { speaker: "Narrator", text: "You slip your hand between her thighs while your other hand grabs the apple", char: "cook_apple.png", pos: "right" },
+                    { speaker: "Cook", text: "ooohh I want you...", char: "cook_cooked.png", pos: "right" },  
+                    { speaker: "Narrator", text: "You slip your hand between her thighs while your other hand grabs the apple", char: "cook_apple2.png", pos: "right" },
                     { speaker: "Narrator", text: "You return to the hall having satisfied her and taken your fill of pleasure", char: "cook_pleasure.png", pos: "right" },  
                     { speaker: "MC", text: "I have the poisoned apple. Who should I slip it to?", char: "mc.png", pos: "right" }
                 ], choices: [
@@ -857,11 +896,18 @@
         
         gameScript.scenes.ending_princess_rachel = {bg: "bg_princess_rachel_ending1.png",dialogues: [{ speaker: "Princess Elara", text: "You chose me... and Rachel.", char: "princess_crawl.png", pos: "center" },{ speaker: "Rachel", text: "The three of us will be unstoppable together.", char: "rachel_aroused.png", pos: "center" }], isEnding: true};
         
-        gameScript.scenes.ending_princess_alejandra = { bg: "bg_princess_alejandra_ending1.png", dialogues: [{ speaker: "Princess Elara", text: "You protected me... and chose Alejandra as well?", char: "princess_kneel.png", pos: "center" },{ speaker: "Alejandra", text: "Smart boy. We will share you.", char: "alejandra_aroused.png", pos: "center"  }],isEnding: true};
+        gameScript.scenes.ending_princess_alejandra = { bg: "bg_princess_alejandra_ending1.png", dialogues: [{ speaker: "Princess Elara", text: "You protected me... and chose Alejandra as well?", char: "princess_kneel.png", pos: "center" },{ speaker: "Alejandra", text: "Smart boy. We will share you.", char: "alejandra_dg.png", pos: "center"  }],next: "ending_princess_alejandra2"  };
+
+        gameScript.scenes.ending_princess_alejandra2 = { bg: "bg_princess_alejandra_ending2.png", dialogues: [{ speaker: "Alejandra", text: "Breed me, my Lord.", char: "alejandra_top2.png", pos: "left"  }],
+        next: "ending_princess_alejandra3"};
+
+        gameScript.scenes.ending_princess_alejandra3 = { bg: "bg_princess_alejandra_ending2.png",  isEnding: true};
         
         gameScript.scenes.ending_rachel_alejandra = { bg: "bg_alejandra_rachel_ending1.png", dialogues: [{ speaker: "Rachel", text: "I am all yours", char: "princess.png", pos: "center" },{ speaker: "Alejandra", text: "Master, we will share you.", char: "alejandra_aroused.png", pos: "center"  }],isEnding: true};
 
-        gameScript.scenes.ending_princess1 = { bg: "bg_princess_ending1.png", dialogues: [{ speaker: "Princess Elara", text: "You saved me... I love you.", char: "princess_top.png", pos: "center" }], isEnding: true };
+        gameScript.scenes.ending_princess1 = { bg: "bg_princess_ending1.png", dialogues: [{ speaker: "Princess Elara", text: "You saved me... I love you.", char: "princess_top.png", pos: "center" }], next: "ending_princess1_slide2" };
+
+        gameScript.scenes.ending_princess1_slide2 = { bg: "bg_princess_ending2.png", isEnding: true };
         
         gameScript.scenes.ending_queen_executes = { bg: "bg_queen_executes.png", dialogues: [{ speaker: "Queen", text: "You dared to betray us - Now you shall pay the price!", char: "queen_fury.png", pos: "right" }], isEnding: true };
         
@@ -871,13 +917,13 @@
 
         gameScript.scenes.ending_rachel_ending2 = { bg: "bg_rachel_ending2.png", dialogues: [{ speaker: "Rachel", text: "Our magic is complete.", char: "rachel_aroused.png", pos: "center" }], isEnding: true };
         
-        gameScript.scenes.ending_alejandra_ending2 = { bg: "bg_alejandra_ending2.png", dialogues: [{ speaker: "Alejandra", text: "I am all yours my lord.", char: "alejandra_interest.png", pos: "center" }], isEnding: true };
+        gameScript.scenes.ending_alejandra_ending2 = { bg: "bg_alejandra_ending2.png", dialogues: [{ speaker: "Alejandra", text: "I am all yours my lord.", char: "alejandra_close.png", pos: "center" }], isEnding: true };
         
         gameScript.scenes.ending_queen_secret = { bg: "bg_queen_secret.png", dialogues: [{ speaker: "Queen", text: "The Princess is gone... Now we shall rule together my lover.", char: "queen_aroused.png", pos: "left" }], isEnding: true };
         
         gameScript.scenes.ending_solo = { bg: "bg_solo_ending.png", dialogues: [{ speaker: "Narrator", text: "You survived... but at what cost?", noSprite: true }], isEnding: true };
 
-        gameScript.scenes.ending_princess_betrayal = { bg: "bg_princess_betrayal.png", dialogues: [{ speaker: "Princess Elara", text: "You broke my heart... I trusted you!", char: "princess_angry.png", pos: "center" }], isEnding: true };
+        gameScript.scenes.ending_princess_betrayal = { bg: "bg_princess_betrayal.png", dialogues: [{ speaker: "Princess Elara", text: "You broke my heart... I trusted you!", noSprite: true }], isEnding: true };
 
         // ====================== GAME ENGINE ======================
 let currentScene = "start";
